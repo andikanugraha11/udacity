@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  database:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment: 
+      - POSTGRES_DB=udacity_fullstack_02
+      - POSTGRES_PASSWORD=Pass2021!
+
+  application:
+    build: .
+    command: tail -f /dev/null
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    ports: 
+      - 5000:5000
+    links: 
+      - database
+    
